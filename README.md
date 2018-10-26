@@ -1,20 +1,17 @@
-# react-ab-test
+## SSR support = true
 
-Simple library for A/B-testing react apps
+---
 
-## Installation
+## examples
 
-```sh
-$ npm install react-abtesting --save
-```
-
-## SSR support
-
-an example will be later
+[client_render_coockie](https://github.com/101internet/react-ab-test/tree/master/src/client_render_coockie)
+[client_render_localstorage](https://github.com/101internet/react-ab-test/tree/master/src/client_render_localstorage)
 
 ## Getting Started
 
 ##### First you need to create an array of tests..
+
+`resolve` ->
 
 ```javascript
 const experimentMap = [
@@ -44,16 +41,28 @@ const experimentMap = [
 
 ##### The next step is to create an adapter for storing and deleting data about the selected variant.
 
-for example, we will save the selected option in the cookie
+The library doesn't care where you save/retrieve `selected variant`, the most common examples are storage in coockies and localStorage.
 
 ```javascript
+// cookies set/get example
 import Cookies from "js-cookie";
 import { StorageAdapter } from "react-abtesting";
 
 const storageAdapter = new StorageAdapter({
-  prefix: "AB_",
-  setter: (name, val) => Cookies.set(name, val),
-  getter: name => Cookies.get(name)
+  prefix: "AB_", // optional
+  setter: (key, val) => Cookies.set(key, val), // required
+  getter: key => Cookies.get(key) // required
+});
+```
+
+```javascript
+// localStorage set/get example
+import { StorageAdapter } from "react-abtesting";
+
+const storageAdapter = new StorageAdapter({
+  prefix: "AB_", // optional
+  setter: (key, val) => localStorage.setItem(key, val), // required
+  getter: key => localStorage.getItem(key) // required
 });
 ```
 
