@@ -5,13 +5,12 @@
 ## examples
 
 [client_render_coockie](https://github.com/101internet/react-ab-test/tree/master/examples/client_render_coockie)
+
 [client_render_localstorage](https://github.com/101internet/react-ab-test/tree/master/examples/client_render_localstorage)
 
 ## Getting Started
 
 ##### First you need to create an array of tests..
-
-`resolve` ->
 
 ```javascript
 const experimentMap = [
