@@ -1,5 +1,5 @@
-export * from "./components/experiment";
-export * from "./components/variant";
-export * from "./components/provider";
-export * from "./adapters/storageAdapter";
-export * from "./utils/AB_Test";
+export { Experiment } from "./components/experiment";
+export { Variant } from "./components/variant";
+export { AB_Provider } from "./components/provider";
+export { StorageAdapter } from "./adapters/storageAdapter";
+export { AB_Test } from "./utils/AB_Test";

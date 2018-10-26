@@ -1,8 +1,12 @@
 {
-  "name": "ab-test-react",
+  "name": "react-abtesting",
   "version": "0.0.1",
   "description": "Simple A/B testing for React apps",
   "main": "dist/index.js",
+  "types": "dist/types/index.d.ts",
+  "files": [
+    "dist/"
+  ],
   "scripts": {
     "test": "jest",
     "prebuild": "rimraf dist",

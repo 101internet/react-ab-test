@@ -1,0 +1,19 @@
+/src
+
+# Dependencies
+/node_modules
+
+# IDEs and editors
+/.idea
+/.vscode
+
+# Misc
+/coverage
+*.log
+*.tgz
+
+# System Files
+.DS_Store
+Thumbs.db
+
+# override
