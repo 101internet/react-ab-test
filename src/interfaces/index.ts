@@ -11,7 +11,7 @@ export interface iVariantSelect {
 export interface iExperiment {
   name: string;
   variants: iVariant[];
-  resolve?: () => {};
+  resolve?(variant: iVariantSelect): void;
 }
 
 export interface iReactVariant {
