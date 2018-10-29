@@ -2,7 +2,6 @@ import React from "react";
 import ReactDOM from "react-dom";
 import App from "./app";
 import { AB_Provider, AB_Test, StorageAdapter } from "../../../dist";
-import Cookies from "js-cookie";
 
 const experimentMap = [
   {
