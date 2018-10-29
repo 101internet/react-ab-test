@@ -36,6 +36,7 @@ export class AB_Test {
 
   // Выбор варианта
   selectVariant(variants: iVariant[]): iVariant {
+    variants.sort((a, b) => a.weight - b.weight);
     const selectedVariant: iVariant = this.weightedRandom(
       variants,
       variants.map(v => v.weight)

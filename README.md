@@ -39,6 +39,7 @@ const experimentMap = [
 ```
 
 `resolve` -> function will be called after selecting the option `A/B testing`
+variants of experiments will be sorted in ascending order automatically
 
 ##### The next step is to create an adapter for storing and deleting data about the selected variant.
 
