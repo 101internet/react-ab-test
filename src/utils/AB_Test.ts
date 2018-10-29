@@ -9,7 +9,17 @@ export class AB_Test {
     this.storageAdapter = storageAdapter;
 
     experiments.forEach(experiment => {
-      const selectedVariant = this.selectVariant(experiment.variants);
+      let selectedVariant: iVariant;
+
+      const restoredVariant = this.storageAdapter.restoreExperimentVariant(
+        experiment.name
+      );
+
+      if (restoredVariant === null) {
+        selectedVariant = this.selectVariant(experiment.variants);
+      } else {
+        selectedVariant = restoredVariant;
+      }
 
       const saveVariant: iVariantSelect = {
         experimentName: experiment.name,
