@@ -1,6 +1,6 @@
 ## SSR support = true
 
----
+an example will be later
 
 ## examples
 
