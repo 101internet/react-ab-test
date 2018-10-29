@@ -1,12 +1,12 @@
 ## SSR support = true
 
-an example will be later
-
 ## examples
 
 [client_render_coockie](https://github.com/101internet/react-ab-test/tree/master/examples/client_render_coockie)
 
 [client_render_localstorage](https://github.com/101internet/react-ab-test/tree/master/examples/client_render_localstorage)
+
+[server_render_coockie](https://github.com/101internet/react-ab-test/tree/master/examples/server_render_coockie)
 
 ## Getting Started
 
