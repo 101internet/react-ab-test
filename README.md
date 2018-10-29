@@ -2,6 +2,16 @@
 
 ## examples
 
+to run the examples you need
+
+1. clone this repo
+2. cd react-ab-test
+3. npm i && npm run build
+   - cd examples/client_render_coockie or examples/client_render_localstorage
+     - npm i && npm start
+   - cd examples/server_render_coockie
+     - npm i && npm run build && npm start
+
 [client_render_coockie](https://github.com/101internet/react-ab-test/tree/master/examples/client_render_coockie)
 
 [client_render_localstorage](https://github.com/101internet/react-ab-test/tree/master/examples/client_render_localstorage)
