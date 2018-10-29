@@ -38,6 +38,8 @@ const experimentMap = [
 ];
 ```
 
+`resolve` -> function will be called after selecting the option `A/B testing`
+
 ##### The next step is to create an adapter for storing and deleting data about the selected variant.
 
 The library doesn't care where you save/retrieve `selected variant`, the most common examples are storage in coockies and localStorage.
