@@ -1,14 +1,14 @@
 import { iVariantSelect } from "../interfaces";
 
 interface iStorageOptions {
-  prefix: string;
+  prefix?: string;
 }
 
 export class Storage {
   prefix = "AB_";
   selectedVariantsMap: iVariantSelect[] = [];
 
-  constructor(options: iStorageOptions) {
+  constructor(options?: iStorageOptions) {
     if (options && !!options.prefix) this.prefix = options.prefix;
   }
 

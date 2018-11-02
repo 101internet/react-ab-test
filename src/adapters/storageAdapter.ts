@@ -10,7 +10,7 @@ interface iSetter {
 }
 
 interface iStorageAdapterOptions {
-  prefix: string;
+  prefix?: string;
   getter: iGetter;
   setter: iSetter;
 }
