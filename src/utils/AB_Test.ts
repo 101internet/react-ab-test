@@ -51,7 +51,7 @@ export class AB_Test {
       return prev + cur;
     }, 0);
 
-    const rnd = Math.floor(Math.random() * totalWeight);
+    const rnd = Math.random() * totalWeight;
 
     let n = 0;
 
