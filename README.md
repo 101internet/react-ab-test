@@ -131,6 +131,7 @@ render() {
 import { AB_Provider } from "react-abtesting";
 import { createBrowserHistory } from "history";
 
+const history = createBrowserHistory();
 ReactDOM.render(
     <AB_Provider abTest={abTest} history={history}>
         <App />
