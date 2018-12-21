@@ -5,14 +5,20 @@ export class MyApplication extends React.Component {
     return (
       <div>
         <Experiment name="MyExperiment">
-          <Variant name="A">
+          <Variant name="Default">
             <div>AAAAAAAAAAAAAAAAAAAAAAAA</div>
           </Variant>
           <Variant name="B">
             <div>BBBBBBBBBBBBBBBBBBBBBBBB</div>
           </Variant>
-          <Variant name="C">
-            <div>CCCCCCCCCCCCCCCCCCCCCCCC</div>
+        </Experiment>
+
+        <Experiment name="MyExperiment2">
+          <Variant name="Default">
+            <div>AAAAAAAAAAAAAAAAAAAAAAAA2</div>
+          </Variant>
+          <Variant name="B">
+            <div>BBBBBBBBBBBBBBBBBBBBBBBB2</div>
           </Variant>
         </Experiment>
       </div>

@@ -2,8 +2,11 @@ import React from "react";
 import ReactDOM from "react-dom";
 import App from "./app";
 import { AB_Provider, AB_Test, StorageAdapter } from "../../../dist";
+import { createBrowserHistory } from "history";
+import { Router } from "react-router";
 import Cookies from "js-cookie";
 
+const history = createBrowserHistory();
 const experimentMap = [
   {
     name: "MyExperiment",
@@ -47,8 +50,10 @@ const storageAdapter = new StorageAdapter({
 const abTest = new AB_Test(experimentMap, storageAdapter);
 
 ReactDOM.render(
-  <AB_Provider abTest={abTest}>
-    <App />
-  </AB_Provider>,
+  <Router history={history}>
+    <AB_Provider abTest={abTest} history={history}>
+      <App />
+    </AB_Provider>
+  </Router>,
   document.getElementById("root")
 );

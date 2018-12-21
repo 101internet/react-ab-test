@@ -2,6 +2,7 @@
 
 # Compiled output
 /dist
+public
 
 # Dependencies
 node_modules

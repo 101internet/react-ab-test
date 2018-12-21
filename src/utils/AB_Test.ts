@@ -4,10 +4,10 @@ import { StorageAdapter } from "../adapters/storageAdapter";
 export class AB_Test {
   selectedVariantsMap = [];
   storageAdapter: StorageAdapter;
+  forceRefresh = true;
 
   constructor(experiments: iExperiment[], storageAdapter: StorageAdapter) {
     this.storageAdapter = storageAdapter;
-
     experiments.forEach(experiment => {
       let selectedVariant: iVariant;
 
@@ -15,7 +15,7 @@ export class AB_Test {
         experiment.name
       );
 
-      if (restoredVariant === null) {
+      if (restoredVariant === null || !experiment.variants.find(variant => variant.name == restoredVariant.name)) {
         selectedVariant = this.selectVariant(experiment.variants);
       } else {
         selectedVariant = restoredVariant;
@@ -37,7 +37,7 @@ export class AB_Test {
   // Выбор варианта
   selectVariant(variants: iVariant[]): iVariant {
     variants.sort((a, b) => a.weight - b.weight);
-    const selectedVariant: iVariant = this.weightedRandom(
+    const selectedVariant: iVariant = this.weightedRandom( 
       variants,
       variants.map(v => v.weight)
     );
@@ -64,7 +64,13 @@ export class AB_Test {
   }
 
   // Получение варинта по имени эксперимента
-  getVariant(experimentName: string) {
-    return this.storageAdapter.getVariant(experimentName);
+  getVariant(experimentName?: string) {
+      // TODO maybe select first in list variants, or append <VariantDefault>
+      if(!experimentName) {
+          experimentName = 'Default';
+      }
+
+      let selectedVariant = this.storageAdapter.getVariant(experimentName);
+      return selectedVariant ;
   }
 }
