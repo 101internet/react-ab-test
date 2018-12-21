@@ -124,3 +124,16 @@ render() {
         </div>
 )}
 ```
+
+#### Use with history package
+
+```javascript
+import { AB_Provider } from "react-abtesting";
+import { createBrowserHistory } from "history";
+
+ReactDOM.render(
+    <AB_Provider abTest={abTest} history={history}>
+        <App />
+    </AB_Provider>
+);
+```
