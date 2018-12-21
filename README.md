@@ -1,5 +1,12 @@
 ## SSR support = true
 
+## Google Like A/B test
+
+Google advises doing 2 things with A / B testing.
+
+1. Redirect with GET parameter on the page with the tested variant
+2. Set the canonical tag on page
+
 ## examples
 
 to run the examples you need
@@ -7,20 +14,26 @@ to run the examples you need
 1. clone this repo
 2. cd react-ab-test
 3. npm i && npm run build
-   - cd examples/client_render_coockie or examples/client_render_localstorage
-     - npm i && npm start
-   - cd examples/server_render_coockie
-     - npm i && npm run build && npm start
+    - cd examples/client_render_coockie or examples/client_render_localstorage
+        - npm i && npm start
+    - cd examples/server_render_coockie
+        - npm i && npm run build && npm start
 
 [client_render_coockie](https://github.com/101internet/react-ab-test/tree/master/examples/client_render_coockie)
+
+[client_render_coockie_with_react-router](https://github.com/101internet/react-ab-test/tree/next/examples/client_render_coockie_with_react-router)
 
 [client_render_localstorage](https://github.com/101internet/react-ab-test/tree/master/examples/client_render_localstorage)
 
 [server_render_coockie](https://github.com/101internet/react-ab-test/tree/master/examples/server_render_coockie)
 
+[server_render_coockie_with_react-router](https://github.com/101internet/react-ab-test/tree/next/examples/server_render_coockie_with_react-router)
+
 ## Getting Started
 
 ##### First you need to create an array of tests..
+
+The name `Default` is mandatory, this is an option that will be shown by default on the base link
 
 ```javascript
 const experimentMap = [
@@ -28,16 +41,12 @@ const experimentMap = [
         name: "MyExperiment",
         variants: [
             {
-                name: "A",
-                weight: 3
+                name: "Default",
+                weight: 1
             },
             {
                 name: "B",
-                weight: 7
-            },
-            {
-                name: "C",
-                weight: 10
+                weight: 2
             }
         ],
         resolve: variant => {
@@ -61,9 +70,9 @@ import Cookies from "js-cookie";
 import { StorageAdapter } from "react-abtesting";
 
 const storageAdapter = new StorageAdapter({
-  prefix: "AB_", // optional
-  setter: (key, val) => Cookies.set(key, val), // required
-  getter: key => Cookies.get(key) // required
+    prefix: "AB_", // optional
+    setter: (key, val) => Cookies.set(key, val), // required
+    getter: key => Cookies.get(key) // required
 });
 ```
 
@@ -72,9 +81,9 @@ const storageAdapter = new StorageAdapter({
 import { StorageAdapter } from "react-abtesting";
 
 const storageAdapter = new StorageAdapter({
-  prefix: "AB_", // optional
-  setter: (key, val) => localStorage.setItem(key, val), // required
-  getter: key => localStorage.getItem(key) // required
+    prefix: "AB_", // optional
+    setter: (key, val) => localStorage.setItem(key, val), // required
+    getter: key => localStorage.getItem(key) // required
 });
 ```
 
@@ -90,9 +99,9 @@ const abTest = new AB_Test(experimentMap, storageAdapter);
 ```javascript
 import { AB_Provider } from "react-abtesting";
 ReactDOM.render(
-  <AB_Provider abTest={abTest}>
-    <App />
-  </AB_Provider>
+    <AB_Provider abTest={abTest}>
+        <App />
+    </AB_Provider>
 );
 ```
 
@@ -105,14 +114,11 @@ render() {
     return (
         <div>
             <Experiment name="MyExperiment">
-                <Variant name="A">
+                <Variant name="Default">
                     <div>AAAAAAAAAAAAAAAAAAAAAAAA</div>
                 </Variant>
                 <Variant name="B">
                     <div>BBBBBBBBBBBBBBBBBBBBBBBB</div>
-                </Variant>
-                <Variant name="C">
-                    <div>CCCCCCCCCCCCCCCCCCCCCCCC</div>
                 </Variant>
             </Experiment>
         </div>
