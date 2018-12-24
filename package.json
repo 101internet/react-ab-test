@@ -1,87 +1,91 @@
 {
-  "name": "react-abtesting",
-  "version": "1.0.0-rc1",
-  "description": "Simple A/B testing for React apps",
-  "main": "dist/index.js",
-  "types": "dist/types/index.d.ts",
-  "files": [
-    "dist/"
-  ],
-  "scripts": {
-    "test": "jest",
-    "test:watch": "jest --watch",
-    "test:prod": "npm run test -- --coverage --no-cache",
-    "prebuild": "rimraf dist",
-    "build": "tsc",
-    "start": "tsc -w"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/101internet/react-ab-test.git"
-  },
-  "keywords": [
-    "react",
-    "ab",
-    "test",
-    "react-ab",
-    "react-ab-test",
-    "ssr"
-  ],
-  "author": "xfloooo",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/101internet/react-ab-test/issues"
-  },
-  "homepage": "https://github.com/101internet/react-ab-test#readme",
-  "peerDependencies": {
-    "react": "^16.x"
-  },
-  "devDependencies": {
-    "@types/enzyme": "^3.1.14",
-    "@types/history": "^4.7.2",
-    "@types/jest": "^23.3.9",
-    "@types/query-string": "^6.1.1",
-    "@types/react": "^16.4.18",
-    "coveralls": "^3.0.2",
-    "enzyme": "^3.7.0",
-    "enzyme-adapter-react-16": "^1.6.0",
-    "jest": "^23.6.0",
-    "react": "^16.6.0",
-    "react-dom": "^16.6.0",
-    "rimraf": "^2.6.2",
-    "ts-jest": "^23.10.4",
-    "typescript": "^3.1.3"
-  },
-  "jest": {
-    "transform": {
-      ".(ts|tsx)": "ts-jest"
+    "name": "react-abtesting",
+    "version": "1.0.0-rc1",
+    "description": "Simple A/B testing for React apps",
+    "main": "dist/index.js",
+    "types": "dist/types/index.d.ts",
+    "files": [
+        "dist/"
+    ],
+    "scripts": {
+        "test": "jest",
+        "test:watch": "jest --watch",
+        "test:prod": "npm run test -- --coverage --no-cache",
+        "prebuild": "rimraf dist",
+        "build": "tsc",
+        "start": "tsc -w"
     },
-    "testRegex": "(/__tests__/.*|\\.(test|spec))\\.(ts|tsx|js)$",
-    "moduleFileExtensions": [
-      "ts",
-      "tsx",
-      "js"
-    ],
-    "setupFiles": [
-      "./test/test-shim.ts",
-      "./test/test-setup.ts"
-    ],
-    "coveragePathIgnorePatterns": [
-      "/node_modules/",
-      "/test/"
-    ],
-    "coverageThreshold": {
-      "global": {
-        "branches": 90,
-        "functions": 95,
-        "lines": 95,
-        "statements": 95
-      }
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/101internet/react-ab-test.git"
     },
-    "collectCoverage": true
-  },
-  "dependencies": {
-    "history": "^4.7.2",
-    "query-string": "^6.2.0"
-  }
+    "keywords": [
+        "react",
+        "ab",
+        "test",
+        "react-ab",
+        "react-ab-test",
+        "ssr"
+    ],
+    "author": "xfloooo",
+    "license": "ISC",
+    "bugs": {
+        "url": "https://github.com/101internet/react-ab-test/issues"
+    },
+    "homepage": "https://github.com/101internet/react-ab-test#readme",
+    "peerDependencies": {
+        "react": "^16.x"
+    },
+    "devDependencies": {
+        "@types/enzyme": "^3.1.14",
+        "@types/history": "^4.7.2",
+        "@types/invariant": "^2.2.29",
+        "@types/jest": "^23.3.9",
+        "@types/query-string": "^6.1.1",
+        "@types/react": "^16.4.18",
+        "@types/react-dom": "^16.0.11",
+        "coveralls": "^3.0.2",
+        "enzyme": "^3.7.0",
+        "enzyme-adapter-react-16": "^1.6.0",
+        "jest": "^23.6.0",
+        "react": "^16.6.0",
+        "react-dom": "^16.6.0",
+        "rimraf": "^2.6.2",
+        "ts-jest": "^23.10.4",
+        "typescript": "^3.1.3"
+    },
+    "jest": {
+        "transform": {
+            ".(ts|tsx)": "ts-jest"
+        },
+        "testRegex": "(/__tests__/.*|\\.(test|spec))\\.(ts|tsx|js)$",
+        "moduleFileExtensions": [
+            "ts",
+            "tsx",
+            "js"
+        ],
+        "setupFiles": [
+            "./test/test-shim.ts",
+            "./test/test-setup.ts"
+        ],
+        "coveragePathIgnorePatterns": [
+            "/node_modules/",
+            "/test/"
+        ],
+        "coverageThreshold": {
+            "global": {
+                "branches": 90,
+                "functions": 95,
+                "lines": 95,
+                "statements": 95
+            }
+        },
+        "collectCoverage": true,
+        "testEnvironment": "global"
+    },
+    "dependencies": {
+        "history": "^4.7.2",
+        "invariant": "^2.2.4",
+        "query-string": "^6.2.0"
+    }
 }

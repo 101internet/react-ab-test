@@ -1,19 +1,25 @@
 export interface iVariant {
-  name: string;
-  weight: number;
+    name: string;
+    weight: number;
 }
 
 export interface iVariantSelect {
-  experimentName: string;
-  variant: iVariant;
+    experimentName: string;
+    variant: iVariant;
 }
 
 export interface iExperiment {
-  name: string;
-  variants: iVariant[];
-  resolve?(variant: iVariantSelect): void;
+    name: string;
+    variants: iVariant[];
+    resolve?(variant: iVariantSelect): void;
 }
 
 export interface iReactVariant {
-  name: string;
+    name: string;
+}
+
+export interface iContext {
+    isCanonical?: boolean;
+    statusCode?: number;
+    queryPart?: string;
 }

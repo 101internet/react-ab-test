@@ -2,64 +2,66 @@ import { Storage } from "../src/utils/storage";
 import { iVariantSelect } from "../src/interfaces";
 
 describe("storage", () => {
-  test("add variant in storage", () => {
-    const storage = new Storage();
+    test("add variant in storage", () => {
+        const storage = new Storage();
 
-    const variantSelect: iVariantSelect = {
-      experimentName: "MyTest",
-      variant: {
-        name: "A",
-        weight: 20
-      }
-    };
-    storage.add(variantSelect);
+        const variantSelect: iVariantSelect = {
+            experimentName: "MyTest",
+            variant: {
+                name: "A",
+                weight: 20
+            }
+        };
+        storage.add(variantSelect);
 
-    expect(storage.selectedVariantsMap[0]).toEqual(variantSelect);
-  });
-
-  test("get Experiment name for save in storage with prefix", () => {
-    expect(2);
-    const storage = new Storage();
-    const storage_2 = new Storage({
-      prefix: "PREFIX_"
+        expect(storage.selectedVariantsMap[0]).toEqual(variantSelect);
     });
 
-    storage.getSaveName("experiment"); // AB_experiment
-    storage_2.getSaveName("experiment"); // PREFIX_experiment
+    test("get Experiment name for save in storage with prefix", () => {
+        expect(2);
+        const storage = new Storage();
+        const storage_2 = new Storage({
+            prefix: "PREFIX_"
+        });
 
-    expect(storage.getSaveName("experiment")).toEqual("AB_experiment");
-    expect(storage_2.getSaveName("experiment")).toEqual("PREFIX_experiment");
-  });
+        storage.getSaveName("experiment"); // AB_experiment
+        storage_2.getSaveName("experiment"); // PREFIX_experiment
 
-  test("getVariant with existing experiment", () => {
-    const storage = new Storage();
+        expect(storage.getSaveName("experiment")).toEqual("AB_experiment");
+        expect(storage_2.getSaveName("experiment")).toEqual(
+            "PREFIX_experiment"
+        );
+    });
 
-    const variantSelect: iVariantSelect = {
-      experimentName: "MyTest",
-      variant: {
-        name: "A",
-        weight: 20
-      }
-    };
-    storage.add(variantSelect);
+    test("getVariant with existing experiment", () => {
+        const storage = new Storage();
 
-    expect(storage.getVariant(variantSelect.experimentName)).toEqual(
-      variantSelect
-    );
-  });
+        const variantSelect: iVariantSelect = {
+            experimentName: "MyTest",
+            variant: {
+                name: "A",
+                weight: 20
+            }
+        };
+        storage.add(variantSelect);
 
-  test("getVariant without existing experiment", () => {
-    const storage = new Storage();
+        expect(storage.getVariant(variantSelect.experimentName)).toEqual(
+            variantSelect
+        );
+    });
 
-    const variantSelect: iVariantSelect = {
-      experimentName: "MyTest",
-      variant: {
-        name: "A",
-        weight: 20
-      }
-    };
-    storage.add(variantSelect);
+    test("getVariant without existing experiment", () => {
+        const storage = new Storage();
 
-    expect(storage.getVariant("experimentNotExist")).toEqual(undefined);
-  });
+        const variantSelect: iVariantSelect = {
+            experimentName: "MyTest",
+            variant: {
+                name: "A",
+                weight: 20
+            }
+        };
+        storage.add(variantSelect);
+
+        expect(storage.getVariant("experimentNotExist")).toEqual(undefined);
+    });
 });
