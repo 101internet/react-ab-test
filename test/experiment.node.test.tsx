@@ -1,3 +1,6 @@
+/**
+ * @jest-environment node
+ */
 import * as React from "react";
 import { render, mount } from "enzyme";
 import { Variant } from "../src/components/variant";
@@ -63,24 +66,7 @@ beforeEach(() => {
 });
 
 describe("Experiment", () => {
-    test("without AB_Provider", () => {
-        expect(() => {
-            render(<Experiment name="MyExperiment" />);
-        }).toThrow(/You should not use <Experiment> outside a <AB_Provider>/);
-    });
-
-    test("without experiment", () => {
-        const text = "Test";
-        const wrapper = render(
-            <AB_Provider abTest={abTest}>
-                <div>{text}</div>
-            </AB_Provider>
-        );
-
-        expect(wrapper.text()).toEqual(text);
-    });
-
-    test("render Default variant", () => {
+    test("without location", () => {
         const storage = new Storage();
         const storageAdapter = new StorageAdapter({
             setter: (name, val) => {
@@ -89,6 +75,39 @@ describe("Experiment", () => {
             getter: name => storage.get(name)
         });
 
+        const abTest = new AB_Test(experimentMap, storageAdapter);
+
+        const experimentName = "MyExperiment";
+        let abContext: iContext = {};
+
+        expect(() => {
+            render(
+                <AB_Provider abTest={abTest} context={abContext}>
+                    <Experiment name={experimentName}>
+                        <Variant name="Default">
+                            <div>A</div>
+                        </Variant>
+                        <Variant name="B">
+                            <div>B</div>
+                        </Variant>
+                    </Experiment>
+                </AB_Provider>
+            );
+        }).toThrow(
+            /Location not defined, use createLocation from package History and set this on AB_Provider/
+        );
+    });
+
+    test("render Default variant after not default", () => {
+        const storage = new Storage();
+        const storageAdapter = new StorageAdapter({
+            setter: (name, val) => {
+                storage.set(name, val);
+            },
+            getter: name => storage.get(name)
+        });
+
+        // { statusCode: 302, queryPart: '' }
         const variantSelect: iVariantSelect = {
             experimentName: "MyExperiment",
             variant: {
@@ -96,16 +115,18 @@ describe("Experiment", () => {
                 weight: 1
             }
         };
-
+        const returnedContext = {
+            statusCode: 302,
+            queryPart: ""
+        };
         storageAdapter.addExperimentVariant(variantSelect);
-        const abTest = new AB_Test(experimentMap, storageAdapter);
-
+        const abTest_ = new AB_Test(experimentMap, storageAdapter);
         const experimentName = "MyExperiment";
         let abContext: iContext = {};
-        const location = createLocation("/test");
+        const location = createLocation("/test?MyExperiment=B");
         const wrapper = render(
             <AB_Provider
-                abTest={abTest}
+                abTest={abTest_}
                 context={abContext}
                 location={location}
             >
@@ -120,55 +141,6 @@ describe("Experiment", () => {
             </AB_Provider>
         );
 
-        expect(wrapper.text()).toEqual("A");
-    });
-
-    test("render not default variant", () => {
-        const storage = new Storage();
-        const storageAdapter = new StorageAdapter({
-            setter: (name, val) => {
-                storage.set(name, val);
-            },
-            getter: name => storage.get(name)
-        });
-        const variantSelect: iVariantSelect = {
-            experimentName: "MyExperiment",
-            variant: {
-                name: "B",
-                weight: 2
-            }
-        };
-        storageAdapter.addExperimentVariant(variantSelect);
-
-        const abTest_ = new AB_Test(experimentMap, storageAdapter);
-
-        const returnedContext = {
-            isCanonical: true,
-            statusCode: 302,
-            queryPart: "MyExperiment=B"
-        };
-
-        const experimentName = "MyExperiment";
-        let abContext: iContext = {};
-        const wrapper = mount(
-            <AB_Provider abTest={abTest_} context={abContext}>
-                <Experiment name={experimentName}>
-                    <Variant name="Default">
-                        <div>A</div>
-                    </Variant>
-                    <Variant name="B">
-                        <div>B</div>
-                    </Variant>
-                </Experiment>
-            </AB_Provider>
-        );
-
-        const selectedVariant = abTest_.storageAdapter.getVariant(
-            experimentName
-        );
-
-        expect(wrapper.text()).toEqual("A");
-        expect(selectedVariant).toEqual(variantSelect);
         expect(abContext).toEqual(returnedContext);
     });
 });

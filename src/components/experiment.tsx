@@ -58,6 +58,7 @@ export class Experiment extends React.Component<SnackProps> {
                     let redirectQuery = "";
                     let isRedirect = false;
                     let location = null;
+
                     if (value.location) {
                         location = value.location;
                     } else if (typeof window != "undefined") {

@@ -41,13 +41,16 @@
         "@types/history": "^4.7.2",
         "@types/invariant": "^2.2.29",
         "@types/jest": "^23.3.9",
+        "@types/jsdom": "^12.2.0",
         "@types/query-string": "^6.1.1",
         "@types/react": "^16.4.18",
         "@types/react-dom": "^16.0.11",
         "coveralls": "^3.0.2",
         "enzyme": "^3.7.0",
         "enzyme-adapter-react-16": "^1.6.0",
+        "history": "^4.7.2",
         "jest": "^23.6.0",
+        "jsdom": "^13.1.0",
         "react": "^16.6.0",
         "react-dom": "^16.6.0",
         "rimraf": "^2.6.2",
@@ -81,10 +84,9 @@
             }
         },
         "collectCoverage": true,
-        "testEnvironment": "global"
+        "testEnvironment": "jsdom"
     },
     "dependencies": {
-        "history": "^4.7.2",
         "invariant": "^2.2.4",
         "query-string": "^6.2.0"
     }
