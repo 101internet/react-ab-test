@@ -57,7 +57,7 @@ export class Experiment extends React.Component<SnackProps> {
                     // Проверяем правильность URL
                     let redirectQuery = "";
                     let isRedirect = false;
-                    let location = null;
+                    let location: any = null;
 
                     if (value.location) {
                         location = value.location;
@@ -103,9 +103,16 @@ export class Experiment extends React.Component<SnackProps> {
                         }
                         return (
                             <Lifecycle
+                                path={redirectQuery}
                                 onMount={() => {
                                     this.redirector(
                                         redirectQuery,
+                                        value.history
+                                    );
+                                }}
+                                onUpdate={(self: any, prevProps: any) => {
+                                    this.redirector(
+                                        self.props.path,
                                         value.history
                                     );
                                 }}
@@ -125,6 +132,11 @@ export class Experiment extends React.Component<SnackProps> {
 class Lifecycle extends React.Component<any> {
     componentDidMount() {
         if (this.props.onMount) this.props.onMount.call(this, this);
+    }
+
+    componentDidUpdate(prevProps: any) {
+        if (this.props.onUpdate)
+            this.props.onUpdate.call(this, this, prevProps);
     }
 
     render() {
