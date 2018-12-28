@@ -71,10 +71,6 @@ export class Experiment extends React.Component<SnackProps> {
 
                     const parsed = queryString.parse(location.search);
                     if (selectedVariant.variant.name != "Default") {
-                        if (value.context) {
-                            value.context.isCanonical = true;
-                        }
-
                         if (
                             !(selectedVariant.experimentName in parsed) ||
                             parsed[selectedVariant.experimentName] !=
@@ -87,12 +83,20 @@ export class Experiment extends React.Component<SnackProps> {
                             );
                             isRedirect = true;
                             redirectQuery = queryString.stringify(parsed);
+                        } else {
+                            if (value.context) {
+                                value.context.isCanonical = true;
+                            }
                         }
                     } else {
                         if (selectedVariant.experimentName in parsed) {
                             delete parsed[selectedVariant.experimentName];
                             isRedirect = true;
                             redirectQuery = queryString.stringify(parsed);
+
+                            if (value.context) {
+                                value.context.isCanonical = true;
+                            }
                         }
                     }
 
