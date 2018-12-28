@@ -1,6 +1,6 @@
 {
     "name": "react-abtesting",
-    "version": "1.0.3-rc1",
+    "version": "1.0.4-rc1",
     "description": "Simple A/B testing for React apps",
     "main": "dist/index.js",
     "types": "dist/types/index.d.ts",
