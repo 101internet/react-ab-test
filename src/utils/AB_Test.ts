@@ -1,11 +1,12 @@
 import { iExperiment, iVariant, iVariantSelect } from "../interfaces";
 import { StorageAdapter } from "../adapters/storageAdapter";
 import invariant from "invariant";
+import {History} from "history";
 
 export class AB_Test {
-    selectedVariantsMap = [];
     storageAdapter: StorageAdapter;
     forceRefresh = true;
+    queryPart = '';
 
     constructor(experiments: iExperiment[], storageAdapter: StorageAdapter) {
         this.storageAdapter = storageAdapter;
@@ -38,6 +39,24 @@ export class AB_Test {
                 experiment.resolve(saveVariant);
             }
         });
+
+        this.setQueryPart();
+    }
+
+    private setQueryPart(): void {
+
+        let withoutDefault = this.storageAdapter.selectedVariantsMap.filter(v =>
+             v.variant.name != `Default`
+        );
+
+        let queryPartArray: string[] = [];
+        if (Array.isArray(withoutDefault)){
+            queryPartArray = withoutDefault.map(v => {
+                return `${v.experimentName}=${v.variant.name}`
+            });
+        }
+
+        this.queryPart = queryPartArray.join('&')
     }
 
     // Выбор варианта

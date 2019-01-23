@@ -1,5 +1,5 @@
 import React from "react";
-import { Consumer } from "../utils/createContext";
+import { Consumer, ABContext } from "../utils/createContext";
 import { AB_Test } from "../utils/AB_Test";
 import { iReactVariant, iVariantSelect, iContext } from "../interfaces";
 import queryString from "query-string";
@@ -10,19 +10,22 @@ export interface SnackProps {
 }
 
 export class Experiment extends React.Component<SnackProps> {
+    static contextType = ABContext;
     redirector(redirectQuery: string, history: History) {
+        console.log(window.location.search)
         if (typeof window != "undefined") {
             if (history) {
                 history.replace({
-                    search: redirectQuery
+                    search: this.context.abTest.queryPart
                 });
             } else {
-                window.location.search = redirectQuery;
+                window.location.search = this.context.abTest.queryPart;
             }
         }
     }
 
     render() {
+        console.log('render')
         const { children, name: experimentName } = this.props;
         return (
             <Consumer>
