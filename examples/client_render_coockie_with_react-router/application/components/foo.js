@@ -21,6 +21,14 @@ export const Foo = () => {
                     <div>BBBBBBBBBBBBBBBBBBBBBBBB2</div>
                 </Variant>
             </Experiment>
+            <Experiment name="MyExperiment3">
+                <Variant name="Default">
+                    <div>AAAAAAAAAAAAAAAAAAAAAAAA2</div>
+                </Variant>
+                <Variant name="B">
+                    <div>BBBBBBBBBBBBBBBBBBBBBBBB2</div>
+                </Variant>
+            </Experiment>
         </React.Fragment>
     );
 };

@@ -39,6 +39,22 @@ const experimentMap = [
         resolve: variant => {
             console.log("MyExperiment2: selected variant", variant);
         }
+    },
+    {
+        name: "MyExperiment3",
+        variants: [
+            {
+                name: "Default",
+                weight: 1
+            },
+            {
+                name: "B",
+                weight: 2
+            }
+        ],
+        resolve: variant => {
+            console.log("MyExperiment2: selected variant", variant);
+        }
     }
 ];
 

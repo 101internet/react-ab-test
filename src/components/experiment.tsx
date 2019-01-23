@@ -12,20 +12,23 @@ export interface SnackProps {
 export class Experiment extends React.Component<SnackProps> {
     static contextType = ABContext;
     redirector(redirectQuery: string, history: History) {
-        console.log(window.location.search)
         if (typeof window != "undefined") {
-            if (history) {
-                history.replace({
-                    search: this.context.abTest.queryPart
-                });
-            } else {
-                window.location.search = this.context.abTest.queryPart;
+            const parsed = queryString.parse(location.search);
+            const newPart = {...parsed, ...this.context.abTest.queryPart};
+            const newUrlPart = queryString.stringify(newPart);
+            if (newUrlPart != queryString.extract(location.href)) {
+                if (history) {
+                    history.replace({
+                        search: newUrlPart
+                    });
+                } else {
+                    window.location.search = newUrlPart;
+                }
             }
         }
     }
 
     render() {
-        console.log('render')
         const { children, name: experimentName } = this.props;
         return (
             <Consumer>
