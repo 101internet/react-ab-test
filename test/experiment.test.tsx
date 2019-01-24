@@ -143,7 +143,6 @@ describe("Experiment", () => {
         const abTest_ = new AB_Test(experimentMap, storageAdapter);
 
         const returnedContext = {
-            isCanonical: true,
             statusCode: 302,
             queryPart: "MyExperiment=B"
         };

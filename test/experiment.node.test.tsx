@@ -107,7 +107,6 @@ describe("Experiment", () => {
             getter: name => storage.get(name)
         });
 
-        // { statusCode: 302, queryPart: '' }
         const variantSelect: iVariantSelect = {
             experimentName: "MyExperiment",
             variant: {
@@ -117,7 +116,8 @@ describe("Experiment", () => {
         };
         const returnedContext = {
             statusCode: 302,
-            queryPart: ""
+            queryPart: "",
+            isCanonical: true
         };
         storageAdapter.addExperimentVariant(variantSelect);
         const abTest_ = new AB_Test(experimentMap, storageAdapter);
